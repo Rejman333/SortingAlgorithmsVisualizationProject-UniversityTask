@@ -31,14 +31,14 @@ void insertion_sort_visual(std::vector<int> &to_sort) {
         int j = i - 1;
         to_sort[0] = elem; //Sentinel for better performance
         BeginDrawing();
-        DrawArray(to_sort, i - 1, i);
+        draw_array(to_sort, i - 1, i);
 
         while (to_sort[j] > elem) {
             to_sort[j + 1] = to_sort[j];
             j--;
 
             BeginDrawing();
-            DrawArray(to_sort, j, j + 1);
+            draw_array(to_sort, j, j + 1);
         }
         to_sort[j + 1] = elem;
     }
@@ -46,7 +46,7 @@ void insertion_sort_visual(std::vector<int> &to_sort) {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        DrawArray(to_sort);
+        draw_array(to_sort);
     }
 
     CloseWindow();
@@ -71,7 +71,7 @@ void selection_sort_visual(std::vector<int> &to_sort) {
         for (int j = i + 1; j < to_sort.size(); j++) {
             if (to_sort[min_idx] > to_sort[j]) min_idx = j;
             BeginDrawing();
-            DrawArray(to_sort, min_idx, j);
+            draw_array(to_sort, min_idx, j);
         }
         if (min_idx != i) {
             std::swap(to_sort[i], to_sort[min_idx]);
@@ -80,7 +80,7 @@ void selection_sort_visual(std::vector<int> &to_sort) {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        DrawArray(to_sort);
+        draw_array(to_sort);
     }
 
     CloseWindow();
@@ -115,7 +115,7 @@ void bubble_sort_visual(std::vector<int> &to_sort) {
         was_swap = false;
         for (int i = 1; i < end; i++) {
             BeginDrawing();
-            DrawArray(to_sort, i - 1, i);
+            draw_array(to_sort, i - 1, i);
             if (to_sort[i - 1] > to_sort[i]) {
                 std::swap(to_sort[i - 1], to_sort[i]);
                 was_swap = true;
@@ -126,7 +126,7 @@ void bubble_sort_visual(std::vector<int> &to_sort) {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        DrawArray(to_sort);
+        draw_array(to_sort);
     }
 
     CloseWindow();
@@ -161,7 +161,7 @@ size_t partition_visual(std::vector<int> &to_sort, size_t start, size_t end) {
 
     for (auto j = start; j < end; j++) {
         BeginDrawing();
-        DrawArray(to_sort, j, i);
+        draw_array(to_sort, j, i);
         if (to_sort[j] < pivot) {
             std::swap(to_sort[i], to_sort[j]);
             i++;
@@ -187,7 +187,7 @@ void quick_sort_visual(std::vector<int> &to_sort, size_t start, size_t end) {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        DrawArray(to_sort);
+        draw_array(to_sort);
     }
     CloseWindow();
 }
@@ -221,7 +221,7 @@ void shell_sort_visual(std::vector<int> &to_sort) {
             for (j = i; j >= gap && to_sort[j - gap] > temp; j -= gap) {
                 to_sort[j] = to_sort[j - gap];
                 BeginDrawing();
-                DrawArray(to_sort, j, j - gap);
+                draw_array(to_sort, j, j - gap);
             }
             to_sort[j] = temp;
         }
@@ -229,7 +229,7 @@ void shell_sort_visual(std::vector<int> &to_sort) {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        DrawArray(to_sort);
+        draw_array(to_sort);
     }
     CloseWindow();
 }
@@ -257,16 +257,16 @@ void heap_sort_visual(std::vector<int> &to_sort) {
             size_t parent_index = (i - 1) / 2;
             if (to_sort[i] > to_sort[parent_index])std::swap(to_sort[i], to_sort[parent_index]);
             BeginDrawing();
-            DrawArray(to_sort, i, parent_index);
+            draw_array(to_sort, i, parent_index);
         }
         std::swap(to_sort[0], to_sort[end_index]);
         BeginDrawing();
-        DrawArray(to_sort, 0, end_index);
+        draw_array(to_sort, 0, end_index);
     }
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        DrawArray(to_sort);
+        draw_array(to_sort);
     }
     CloseWindow();
 

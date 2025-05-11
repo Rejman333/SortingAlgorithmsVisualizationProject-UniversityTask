@@ -1,7 +1,7 @@
 #include "headers/visuals.h"
 
 
-void DrawArray(const std::vector<int> &arr, int highlight1, int highlight2) {
+void draw_array(const std::vector<int> &arr, int highlight1, int highlight2) {
     ClearBackground(BLACK);
     for (int i = 0; i < arr.size(); i++) {
         auto color = WHITE;
@@ -10,7 +10,5 @@ void DrawArray(const std::vector<int> &arr, int highlight1, int highlight2) {
     }
     EndDrawing();
 }
-
-
 
 
