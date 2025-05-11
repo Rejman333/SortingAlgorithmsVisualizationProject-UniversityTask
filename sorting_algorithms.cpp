@@ -1,0 +1,273 @@
+#include "headers/sorting_algorithms.h"
+#include "headers/visuals.h"
+/*
+II grupa metod:
+	Sortowanie przez kopcowanie    Heap Sort
+ */
+
+//How to dell with sentinel value?
+void insertion_sort(std::vector<int> &to_sort) {
+    to_sort.insert(to_sort.begin(), 0);
+    for (int i = 2; i < to_sort.size(); i++) {
+        const int elem = to_sort[i];
+        int j = i - 1;
+        to_sort[0] = elem; //Sentinel for better performance
+        while (to_sort[j] > elem) {
+            to_sort[j + 1] = to_sort[j];
+            j--;
+        }
+        to_sort[j + 1] = elem;
+    }
+    to_sort.erase(to_sort.begin());
+}
+
+void insertion_sort_visual(std::vector<int> &to_sort) {
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Bubble Sort Visualizer");
+    SetTargetFPS(TARGET_FPS);
+
+    to_sort.insert(to_sort.begin(), 0);
+    for (int i = 2; i < to_sort.size(); i++) {
+        const int elem = to_sort[i];
+        int j = i - 1;
+        to_sort[0] = elem; //Sentinel for better performance
+        BeginDrawing();
+        DrawArray(to_sort, i - 1, i);
+
+        while (to_sort[j] > elem) {
+            to_sort[j + 1] = to_sort[j];
+            j--;
+
+            BeginDrawing();
+            DrawArray(to_sort, j, j + 1);
+        }
+        to_sort[j + 1] = elem;
+    }
+    to_sort.erase(to_sort.begin());
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        DrawArray(to_sort);
+    }
+
+    CloseWindow();
+}
+
+void selection_sort(std::vector<int> &to_sort) {
+    for (int i = 0; i < to_sort.size(); i++) {
+        int min_idx = i;
+        for (int j = i + 1; j < to_sort.size(); j++) {
+            if (to_sort[min_idx] > to_sort[j]) min_idx = j;
+        }
+        if (min_idx != i) std::swap(to_sort[i], to_sort[min_idx]);
+    }
+}
+
+void selection_sort_visual(std::vector<int> &to_sort) {
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Selection Sort Visualizer");
+    SetTargetFPS(TARGET_FPS);
+
+    for (int i = 0; i < to_sort.size(); i++) {
+        int min_idx = i;
+        for (int j = i + 1; j < to_sort.size(); j++) {
+            if (to_sort[min_idx] > to_sort[j]) min_idx = j;
+            BeginDrawing();
+            DrawArray(to_sort, min_idx, j);
+        }
+        if (min_idx != i) {
+            std::swap(to_sort[i], to_sort[min_idx]);
+        }
+    }
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        DrawArray(to_sort);
+    }
+
+    CloseWindow();
+}
+
+void bubble_sort(std::vector<int> &to_sort) {
+    size_t end = to_sort.size();
+    if (end <= 1) return;
+    bool was_swap;
+
+    do {
+        was_swap = false;
+        for (int i = 1; i < end; i++) {
+            if (to_sort[i - 1] > to_sort[i]) {
+                std::swap(to_sort[i - 1], to_sort[i]);
+                was_swap = true;
+            }
+        }
+        end--;
+    } while (was_swap);
+}
+
+void bubble_sort_visual(std::vector<int> &to_sort) {
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Bubble Sort Visualizer");
+    SetTargetFPS(TARGET_FPS);
+
+    size_t end = to_sort.size();
+    if (end <= 1) return;
+    bool was_swap;
+
+    do {
+        was_swap = false;
+        for (int i = 1; i < end; i++) {
+            BeginDrawing();
+            DrawArray(to_sort, i - 1, i);
+            if (to_sort[i - 1] > to_sort[i]) {
+                std::swap(to_sort[i - 1], to_sort[i]);
+                was_swap = true;
+            }
+        }
+        end--;
+    } while (was_swap);
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        DrawArray(to_sort);
+    }
+
+    CloseWindow();
+}
+
+
+size_t partition(std::vector<int> &to_sort, size_t start, size_t end) {
+    int pivot = to_sort[end];
+    size_t i = start;
+
+    for (auto j = start; j < end; j++) {
+        if (to_sort[j] < pivot) {
+            std::swap(to_sort[i], to_sort[j]);
+            i++;
+        }
+    }
+    std::swap(to_sort[i], to_sort[end]);
+
+    return i;
+}
+
+void quick_sort(std::vector<int> &to_sort, size_t start, size_t end) {
+    if (end <= start) return; //base case
+    size_t pivot_index = partition(to_sort, start, end);
+    if (pivot_index > 0) quick_sort(to_sort, start, pivot_index - 1);
+    quick_sort(to_sort, pivot_index + 1, end);
+}
+
+size_t partition_visual(std::vector<int> &to_sort, size_t start, size_t end) {
+    int pivot = to_sort[end];
+    size_t i = start;
+
+    for (auto j = start; j < end; j++) {
+        BeginDrawing();
+        DrawArray(to_sort, j, i);
+        if (to_sort[j] < pivot) {
+            std::swap(to_sort[i], to_sort[j]);
+            i++;
+        }
+    }
+    std::swap(to_sort[i], to_sort[end]);
+
+    return i;
+}
+
+void quick_sort_helper_visual(std::vector<int> &to_sort, size_t start, size_t end) {
+    if (end <= start) return; //base case
+    size_t pivot_index = partition_visual(to_sort, start, end);
+    if (pivot_index > 0) quick_sort_helper_visual(to_sort, start, pivot_index - 1);
+    quick_sort_helper_visual(to_sort, pivot_index + 1, end);
+}
+
+void quick_sort_visual(std::vector<int> &to_sort, size_t start, size_t end) {
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Bubble Sort Visualizer");
+    SetTargetFPS(TARGET_FPS);
+
+    quick_sort_helper_visual(to_sort, start, end);
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        DrawArray(to_sort);
+    }
+    CloseWindow();
+}
+
+void shell_sort(std::vector<int> &to_sort) {
+    size_t n = to_sort.size();
+
+    for (size_t gap = n / 2; gap > 0; gap = gap / 2) {
+        for (size_t i = gap; i < n; i++) {
+            int temp = to_sort[i];
+            size_t j;
+            for (j = i; j >= gap && to_sort[j - gap] > temp; j -= gap) {
+                to_sort[j] = to_sort[j - gap];
+            }
+            to_sort[j] = temp;
+        }
+    }
+}
+
+// Uwaga popraw ewentualny błąd dla negatywnego przepełnienia size_t  w for (j = i; j >= gap && to_sort[j - gap] > temp; j -= gap)
+void shell_sort_visual(std::vector<int> &to_sort) {
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Bubble Sort Visualizer");
+    SetTargetFPS(TARGET_FPS);
+
+    size_t n = to_sort.size();
+
+    for (size_t gap = n / 2; gap > 0; gap = gap / 2) {
+        for (size_t i = gap; i < n; i++) {
+            int temp = to_sort[i];
+            size_t j;
+            for (j = i; j >= gap && to_sort[j - gap] > temp; j -= gap) {
+                to_sort[j] = to_sort[j - gap];
+                BeginDrawing();
+                DrawArray(to_sort, j, j - gap);
+            }
+            to_sort[j] = temp;
+        }
+    }
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        DrawArray(to_sort);
+    }
+    CloseWindow();
+}
+
+void heap_sort(std::vector<int> &to_sort) {
+    if (to_sort.size() <= 1) return;
+
+    for(size_t end_index = to_sort.size() - 1; end_index >0; end_index--) {
+        for (size_t i = end_index; i > 0; i--) {
+            size_t parent_index = (i - 1) / 2;
+            if (to_sort[i] > to_sort[parent_index])std::swap(to_sort[i], to_sort[parent_index]);
+        }
+        std::swap(to_sort[0], to_sort[end_index]);
+    }
+
+}
+
+void heap_sort_visual(std::vector<int> &to_sort) {
+    if (to_sort.size() <= 1) return;
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Bubble Sort Visualizer");
+    SetTargetFPS(TARGET_FPS);
+
+    for(size_t end_index = to_sort.size() - 1; end_index >0; end_index--) {
+        for (size_t i = end_index; i > 0; i--) {
+            size_t parent_index = (i - 1) / 2;
+            if (to_sort[i] > to_sort[parent_index])std::swap(to_sort[i], to_sort[parent_index]);
+            BeginDrawing();
+            DrawArray(to_sort, i, parent_index);
+        }
+        std::swap(to_sort[0], to_sort[end_index]);
+        BeginDrawing();
+        DrawArray(to_sort, 0, end_index);
+    }
+
+    while (!WindowShouldClose()) {
+        BeginDrawing();
+        DrawArray(to_sort);
+    }
+    CloseWindow();
+
+}
