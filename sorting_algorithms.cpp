@@ -44,12 +44,7 @@ void insertion_sort_visual(std::vector<int> &to_sort) {
     }
     to_sort.erase(to_sort.begin());
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        draw_array(to_sort);
-    }
-
-    CloseWindow();
+    finish_animation(to_sort);
 }
 
 void selection_sort(std::vector<int> &to_sort) {
@@ -78,12 +73,7 @@ void selection_sort_visual(std::vector<int> &to_sort) {
         }
     }
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        draw_array(to_sort);
-    }
-
-    CloseWindow();
+    finish_animation(to_sort);
 }
 
 void bubble_sort(std::vector<int> &to_sort) {
@@ -124,12 +114,7 @@ void bubble_sort_visual(std::vector<int> &to_sort) {
         end--;
     } while (was_swap);
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        draw_array(to_sort);
-    }
-
-    CloseWindow();
+    finish_animation(to_sort);
 }
 
 
@@ -185,11 +170,7 @@ void quick_sort_visual(std::vector<int> &to_sort, size_t start, size_t end) {
 
     quick_sort_helper_visual(to_sort, start, end);
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        draw_array(to_sort);
-    }
-    CloseWindow();
+    finish_animation(to_sort);
 }
 
 void shell_sort(std::vector<int> &to_sort) {
@@ -227,11 +208,7 @@ void shell_sort_visual(std::vector<int> &to_sort) {
         }
     }
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        draw_array(to_sort);
-    }
-    CloseWindow();
+    finish_animation(to_sort);
 }
 
 void heap_sort(std::vector<int> &to_sort) {
@@ -264,10 +241,6 @@ void heap_sort_visual(std::vector<int> &to_sort) {
         draw_array(to_sort, 0, end_index);
     }
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-        draw_array(to_sort);
-    }
-    CloseWindow();
+    finish_animation(to_sort);
 
 }
