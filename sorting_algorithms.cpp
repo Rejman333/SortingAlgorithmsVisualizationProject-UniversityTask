@@ -22,7 +22,7 @@ void insertion_sort(std::vector<int> &to_sort) {
 }
 
 void insertion_sort_visual(std::vector<int> &to_sort) {
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Bubble Sort Visualizer");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Insertion Sort Visualizer");
     SetTargetFPS(TARGET_FPS);
 
     to_sort.insert(to_sort.begin(), 0);
@@ -180,7 +180,7 @@ void quick_sort_helper_visual(std::vector<int> &to_sort, size_t start, size_t en
 }
 
 void quick_sort_visual(std::vector<int> &to_sort, size_t start, size_t end) {
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Bubble Sort Visualizer");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Quick Sort");
     SetTargetFPS(TARGET_FPS);
 
     quick_sort_helper_visual(to_sort, start, end);
@@ -209,7 +209,7 @@ void shell_sort(std::vector<int> &to_sort) {
 
 // Uwaga popraw ewentualny błąd dla negatywnego przepełnienia size_t  w for (j = i; j >= gap && to_sort[j - gap] > temp; j -= gap)
 void shell_sort_visual(std::vector<int> &to_sort) {
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Bubble Sort Visualizer");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Shell Sort Visualizer");
     SetTargetFPS(TARGET_FPS);
 
     size_t n = to_sort.size();
@@ -249,7 +249,7 @@ void heap_sort(std::vector<int> &to_sort) {
 
 void heap_sort_visual(std::vector<int> &to_sort) {
     if (to_sort.size() <= 1) return;
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Bubble Sort Visualizer");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Heap Sort Visualizer");
     SetTargetFPS(TARGET_FPS);
 
     for(size_t end_index = to_sort.size() - 1; end_index >0; end_index--) {

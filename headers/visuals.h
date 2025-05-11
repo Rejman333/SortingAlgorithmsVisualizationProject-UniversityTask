@@ -4,7 +4,7 @@
 
 constexpr int SCREEN_WIDTH = 800;
 constexpr int SCREEN_HEIGHT = 600;
-constexpr int NUM_BARS = 100;
+constexpr int NUM_BARS = 20;
 constexpr int BAR_WIDTH = SCREEN_WIDTH / NUM_BARS;
 constexpr int TARGET_FPS = 30;
 
