@@ -117,7 +117,6 @@ void bubble_sort_visual(std::vector<int> &to_sort) {
     finish_animation(to_sort);
 }
 
-
 size_t partition(std::vector<int> &to_sort, size_t start, size_t end) {
     int pivot = to_sort[end];
     size_t i = start;
@@ -133,11 +132,15 @@ size_t partition(std::vector<int> &to_sort, size_t start, size_t end) {
     return i;
 }
 
-void quick_sort(std::vector<int> &to_sort, size_t start, size_t end) {
+void quick_sort_recursive(std::vector<int> &to_sort, size_t start, size_t end) {
     if (end <= start) return; //base case
     size_t pivot_index = partition(to_sort, start, end);
-    if (pivot_index > 0) quick_sort(to_sort, start, pivot_index - 1);
-    quick_sort(to_sort, pivot_index + 1, end);
+    if (pivot_index > 0) quick_sort_recursive(to_sort, start, pivot_index - 1);
+    quick_sort_recursive(to_sort, pivot_index + 1, end);
+}
+
+void quick_sort(std::vector<int> &to_sort) {
+    quick_sort_recursive(to_sort, 0, to_sort.size() - 1);
 }
 
 size_t partition_visual(std::vector<int> &to_sort, size_t start, size_t end) {
@@ -157,21 +160,23 @@ size_t partition_visual(std::vector<int> &to_sort, size_t start, size_t end) {
     return i;
 }
 
-void quick_sort_helper_visual(std::vector<int> &to_sort, size_t start, size_t end) {
+void quick_sort_recursive_visual(std::vector<int> &to_sort, size_t start, size_t end) {
     if (end <= start) return; //base case
     size_t pivot_index = partition_visual(to_sort, start, end);
-    if (pivot_index > 0) quick_sort_helper_visual(to_sort, start, pivot_index - 1);
-    quick_sort_helper_visual(to_sort, pivot_index + 1, end);
+    if (pivot_index > 0) quick_sort_recursive_visual(to_sort, start, pivot_index - 1);
+    quick_sort_recursive_visual(to_sort, pivot_index + 1, end);
 }
 
-void quick_sort_visual(std::vector<int> &to_sort, size_t start, size_t end) {
+void quick_sort_visual(std::vector<int> &to_sort) {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Quick Sort");
     SetTargetFPS(TARGET_FPS);
 
-    quick_sort_helper_visual(to_sort, start, end);
+    quick_sort_recursive_visual(to_sort, 0, to_sort.size() - 1);
 
     finish_animation(to_sort);
 }
+
+
 
 void shell_sort(std::vector<int> &to_sort) {
     size_t n = to_sort.size();
