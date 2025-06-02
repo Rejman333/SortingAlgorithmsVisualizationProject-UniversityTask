@@ -117,7 +117,7 @@ int main() {
         print_menu();
         int option = get_menu_option();
 
-        std::vector<int> array = generate_array_sorted(NUM_BARS, 10, SCREEN_HEIGHT - 10, true);
+        std::vector<int> array = generate_array_sorted(NUM_BARS, 10, SCREEN_HEIGHT - 10,true);
         switch (option) {
             case 1:
                 insertion_sort_visual(array);

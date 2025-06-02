@@ -176,8 +176,6 @@ void quick_sort_visual(std::vector<int> &to_sort) {
     finish_animation(to_sort);
 }
 
-
-
 void shell_sort(std::vector<int> &to_sort) {
     size_t n = to_sort.size();
 
@@ -193,7 +191,6 @@ void shell_sort(std::vector<int> &to_sort) {
     }
 }
 
-// Uwaga popraw ewentualny błąd dla negatywnego przepełnienia size_t  w for (j = i; j >= gap && to_sort[j - gap] > temp; j -= gap)
 void shell_sort_visual(std::vector<int> &to_sort) {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Shell Sort Visualizer");
     SetTargetFPS(TARGET_FPS);
@@ -216,17 +213,69 @@ void shell_sort_visual(std::vector<int> &to_sort) {
     finish_animation(to_sort);
 }
 
-void heap_sort(std::vector<int> &to_sort) {
-    if (to_sort.size() <= 1) return;
+void heapify(std::vector<int>& to_sort, size_t n, size_t i) {
+    size_t largest = i;
+    size_t left = 2 * i + 1;
+    size_t right = 2 * i + 2;
 
-    for(size_t end_index = to_sort.size() - 1; end_index >0; end_index--) {
-        for (size_t i = end_index; i > 0; i--) {
-            size_t parent_index = (i - 1) / 2;
-            if (to_sort[i] > to_sort[parent_index])std::swap(to_sort[i], to_sort[parent_index]);
-        }
-        std::swap(to_sort[0], to_sort[end_index]);
+    if (left < n && to_sort[left] > to_sort[largest])
+        largest = left;
+
+    if (right < n && to_sort[right] > to_sort[largest])
+        largest = right;
+
+    if (largest != i) {
+        std::swap(to_sort[i], to_sort[largest]);
+        heapify(to_sort, n, largest);
     }
+}
 
+void build_max_heap(std::vector<int>& to_sort) {
+    size_t arr_size = to_sort.size();
+    if (arr_size < 2) return;
+
+    for (size_t i = arr_size / 2; i-- > 0; ) {
+        heapify(to_sort, arr_size, i);
+    }
+}
+
+void heap_sort(std::vector<int>& to_sort) {
+    build_max_heap(to_sort);
+
+    for (size_t i = to_sort.size() - 1; i > 0; i--) {
+        std::swap(to_sort[0], to_sort[i]);
+        heapify(to_sort, i, 0);
+    }
+}
+
+void heapify_visual(std::vector<int>& to_sort, size_t n, size_t i) {
+    size_t largest = i;
+    size_t left = 2 * i + 1;
+    size_t right = 2 * i + 2;
+
+    if (left < n && to_sort[left] > to_sort[largest])
+        largest = left;
+
+    if (right < n && to_sort[right] > to_sort[largest])
+        largest = right;
+
+    if (largest != i) {
+        std::swap(to_sort[i], to_sort[largest]);
+        BeginDrawing();
+        draw_array(to_sort, i, largest);
+
+
+        heapify_visual(to_sort, n, largest);
+    }
+}
+
+void build_max_heap_visual(std::vector<int>& to_sort) {
+    size_t arr_size = to_sort.size();
+    if (arr_size < 2) return;
+
+    for (size_t i = arr_size / 2; i-- > 0; ) {
+        heapify_visual(to_sort, arr_size, i);
+    }
 }
 
 void heap_sort_visual(std::vector<int> &to_sort) {
@@ -234,16 +283,11 @@ void heap_sort_visual(std::vector<int> &to_sort) {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Heap Sort Visualizer");
     SetTargetFPS(TARGET_FPS);
 
-    for(size_t end_index = to_sort.size() - 1; end_index >0; end_index--) {
-        for (size_t i = end_index; i > 0; i--) {
-            size_t parent_index = (i - 1) / 2;
-            if (to_sort[i] > to_sort[parent_index])std::swap(to_sort[i], to_sort[parent_index]);
-            BeginDrawing();
-            draw_array(to_sort, i, parent_index);
-        }
-        std::swap(to_sort[0], to_sort[end_index]);
-        BeginDrawing();
-        draw_array(to_sort, 0, end_index);
+    build_max_heap_visual(to_sort);
+
+    for (size_t i = to_sort.size() - 1; i > 0; i--) {
+        std::swap(to_sort[0], to_sort[i]);
+        heapify_visual(to_sort, i, 0);
     }
 
     finish_animation(to_sort);
