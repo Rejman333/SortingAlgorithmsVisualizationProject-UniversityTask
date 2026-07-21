@@ -27,6 +27,11 @@ results/
 ```
 Each folder contains timing results for all sorting algorithms, useful for plotting graphs or comparing performance.
 
+## Demo
+
+![Sort](media/sort.gif)
+
+
 ## How to Run
 
 This project was developed using **JetBrains CLion**, which uses **CMake** as its build system.

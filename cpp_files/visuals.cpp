@@ -1,4 +1,4 @@
-#include "headers/visuals.h"
+#include "../headers/visuals.h"
 
 
 void draw_array(const std::vector<int> &arr, int highlight1, int highlight2) {

@@ -18,14 +18,14 @@ FetchContent_MakeAvailable(raylib)
 
 add_executable(SortingAlgorithms
         main.cpp
-        sorting_algorithms.cpp
+        cpp_files/sorting_algorithms.cpp
         headers/sorting_algorithms.h
-        file_operations.cpp
+        cpp_files/file_operations.cpp
         headers/file_operations.h
-        visuals.cpp
+        cpp_files/visuals.cpp
         headers/visuals.h
-        tools.cpp
+        cpp_files/tools.cpp
         headers/tools.h
-        tools.cpp
+        cpp_files/tools.cpp
 )
 target_link_libraries(SortingAlgorithms raylib)

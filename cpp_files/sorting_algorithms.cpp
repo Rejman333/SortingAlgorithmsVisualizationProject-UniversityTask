@@ -1,5 +1,5 @@
-#include "headers/sorting_algorithms.h"
-#include "headers/visuals.h"
+#include "../headers/sorting_algorithms.h"
+#include "../headers/visuals.h"
 /*
 II grupa metod:
 	Sortowanie przez kopcowanie    Heap Sort
