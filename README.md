@@ -29,7 +29,7 @@ Each folder contains timing results for all sorting algorithms, useful for plott
 
 ## Demo
 
-![Sort](media/sort.gif)
+![Sort](https://raw.githubusercontent.com/Rejman333/SortingAlgorithmsVisualizationProject-UniversityTask/refs/heads/master/media/Sort.gif)
 
 
 ## How to Run
